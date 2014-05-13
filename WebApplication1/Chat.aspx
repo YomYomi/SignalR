@@ -53,16 +53,32 @@
                 $('#listOnlineUsers').append(encodedName);
             };
 
+            $('#txtUser').keypress(function (e) {                
+                if (e.which == 13) {
+                    $('#btnLogin').click();
+                    return false;
+                    
+                }
+            });
+
+            $('#txtMessage').keypress(function (e) {
+                if (e.which == 13) {
+                    $('#btnSend').click();
+                    return false;
+                }
+            });
+            
 
             //// Get the user name and store it to prepend to messages.
             //$('#displayname').val(prompt('Enter your name:', ''));
 
-            $('#btnLogin').click(function ()
+            $('#btnLogin').click(function (event)
             {
                 $('#displayname').val($("#txtUser").val());
                 // Call the Send method on the hub.
                 chat.server.clientLogin($('#displayname').val());
                 $("#btnLogin").attr('disabled', 'disabled');
+                event.preventDefault();
             });
 
 
